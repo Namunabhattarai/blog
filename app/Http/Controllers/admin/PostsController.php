@@ -47,6 +47,12 @@ class PostsController extends Controller
         $post->category_id = $request->input('category_id');
         $post->author= $request->input('author');
         $post->place= $request->input('place');
+        if ($request->hasFile('image')) {
+            // uploading image to images folder
+            $name = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/images', $name);
+            $post->image = $name;
+        }
         
         if($post->save()){
             return redirect()->route('post_list');
@@ -74,9 +80,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        return view('admin.post.edit', compact(['post','categories']));
     }
 
     /**
@@ -86,9 +93,28 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $post->post_title = $request->input('post_title');
+        $post->post_desc = $request->input('post_desc');
+        
+        $post->category_id = $request->input('category_id');
+        $post->author= $request->input('author');
+        $post->place= $request->input('place');
+        if ($request->hasFile('image')) {
+            // uploading image to images folder
+            $name = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public/images', $name);
+            $post->image = $name;
+        }
+        
+        if($post->save()){
+            return redirect()->route('post_list');
+
+        }
+        else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -97,8 +123,18 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        
+        if($post->delete()){
+        return redirect()->route('admin.post.index');
+
+        }
+        else{
+            return redirect()->back();
+        }
+
     }
+    
 }

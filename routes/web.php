@@ -39,5 +39,10 @@ Route::get('/postsmore/{Post}',function(Post $post){
 
 
 Route::get('/admin/posts', [App\Http\Controllers\admin\PostsController::class, 'index'])->name('post_list');
-Route::get('/admin/create_post' , [App\Http\Controllers\admin\PostsController::class, 'create']);
+Route::get('/admin/post/create' , [App\Http\Controllers\admin\PostsController::class, 'create']);
 Route::post('/admin/post/store' , [App\Http\Controllers\admin\PostsController::class, 'store']);
+Route::get('admin/post/edit/{post}', [App\Http\Controllers\admin\PostsController::class, 'edit']);
+Route::post('admin/post/update/{post}', [App\Http\Controllers\admin\PostsController::class, 'update']);
+Route::get('admin/post/destroy/{post}', [App\Http\Controllers\admin\PostsController::class, 'destroy']);
+
+

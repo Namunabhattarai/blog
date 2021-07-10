@@ -7,7 +7,7 @@
              </div>
               <div class="col-md-offset-3 col-md-6">
                   <!-- Form -->
-                  <form  action="/admin/post/store" method="POST">
+                  <form  action="/admin/post/store" method="POST" enctype="multipart/form-data">
                     @csrf
                       <div class="form-group">
                           <label for="post_title">Title</label>
@@ -32,6 +32,13 @@
                         <label for="author">Author</label>
                         <input type="text" name="author" class="form-control" autocomplete="off" required>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="image">Image upload:</label>
+                        <input type="file" name="image" class="form-control" autocomplete="off" required>
+                    </div>
+                    
+
 
                     <div class="form-group">
                         <label for="place">Address</label>

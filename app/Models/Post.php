@@ -13,6 +13,7 @@ class Post extends Model
         'post_desc',
         'category_id',
         'author',
+        'image',
         'place'
     ];
     public function Category(){

@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('post_desc');
             $table->foreignId('category_id')->constrained('posts','id');
             $table->string('author');
+            $table->string('image');
             $table->string('place');
             $table->timestamps();
         });
